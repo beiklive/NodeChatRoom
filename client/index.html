@@ -1,0 +1,49 @@
+<!Doctype HTML>
+<html>
+
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="Cache-Control " content="no-cache,must-revalidate">
+	<meta name="description" content="">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+	<title>Socket.IO chat</title>
+	<link rel="stylesheet" href="./style.css" />
+	<script src="../socket.io.js"></script>
+</head>
+
+<body>
+	
+	<div id="chat-login" class="name-container" >
+		<div class="space">
+			<div class="stars">
+				<div class="star"></div>
+				<div class="star pink"></div>
+				<div class="star blue"></div>
+				<div class="star yellow"></div>
+			</div>
+		</div>
+		<div class="name-tip"></div>
+		<input class="name-input" type='text'/>
+		<div class="name-btn" style="vertical-align:middle" ><span>确认 </span></div>
+		
+	</div>
+	<div id="chat-chat" class="container" style="visibility:hidden;">
+		<div class="content">
+			<!-- <div class="list">
+			<p class="user-name">匿名用户12138</p>
+			<div class="section">123123</div>
+		</div>
+		<div class="list"><div class="section section-self">123123123</div></div> -->
+		</div>
+		<div class="control">
+			<input id='input' type='text'/>
+			<div class="send-btn">Send</div>
+		</div>
+	</div>
+
+	<script src="./app.js"></script>
+	<script src="./index.js"></script>
+</body>
+
+</html>
