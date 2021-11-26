@@ -45,7 +45,6 @@ html, body {
 	bottom: 60px;
 	padding: 15px 0;
 	overflow-y: auto;
-	background-image: url(./images/chat-bg.jpg);
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
