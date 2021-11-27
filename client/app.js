@@ -1,3 +1,4 @@
+var myname = '';
 // 创建类
 function App() {
 	var doc = document;	//获取网页元素
@@ -10,7 +11,7 @@ function App() {
 	this.$nameBtn = doc.querySelector('.name-btn');
 	this.$container = doc.querySelector('.container');
 	this.$name_container = doc.querySelector('.name-container');
-
+	
 }
 
 //编写类的成员函数
@@ -30,7 +31,7 @@ App.prototype.sendMsg = function () {
 
 	//在自己界面增加消息
 	this.$content.innerHTML += '<div class="list">\
-									<p class="user-name text-right"></p>\
+									<p class="user-name text-right">'+myname+'</p>\
 									<div class="section section-self">'+ message + '</div>\
 								</div>';
 	this.$content.scrollTop = this.$content.scrollHeight;
@@ -49,9 +50,9 @@ App.prototype.KeySendMsg = function (event) {
 		}, function (a) {
 			//发送成功
 		});
-
+		console.log("myname" + myname);
 		this.$content.innerHTML += '<div class="list">\
-										<p class="user-name text-right"></p>\
+										<p class="user-name text-right">'+myname+'</p>\
 										<div class="section section-self">'+ message + '</div>\
 									</div>';
 		this.$content.scrollTop = this.$content.scrollHeight;
@@ -70,8 +71,14 @@ App.prototype.sendName = function () {
 		time: new Date()	//消息发送时间
 	}, function (a) {	//回调函数
 		//发送成功
+		myname = message;
+		
+		var box=document.getElementById("chat-login");
+		box.remove();
+
 	});
 	this.$nameInput.value = '';
+	
 };
 //实现按回车键发送名字的功能
 App.prototype.KeySendName = function (event) {
@@ -84,6 +91,8 @@ App.prototype.KeySendName = function (event) {
 			time: new Date()
 		}, function (a) {
 			//发送成功
+			var box=document.getElementById("chat-login");
+			box.remove();
 		});
 		this.$nameInput.value = '';
 	}
