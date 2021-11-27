@@ -5,9 +5,34 @@ var express = require('express'),
 	port = process.env.PORT || 6603,	//服务器端口
 	Online_Dic = new Array(),		//储存在线用户字典
 	Online_HistoryData = new Array(),	//储存用户消息
+	Online_HeadData = new Array(),	//储存用户头像消息
+	Local_HeadStore = new Array(), //本地图像库
 	History_Max = 50;				//储存的最大消息数
 
 app.use(express.static(__dirname + '/client'));
+
+
+
+
+function Read_LocalHead(){
+	var fs = require('fs');
+
+	let components = []
+	const files = fs.readdirSync('./client/images')
+	files.forEach(function (item, index) {
+		let stat = fs.lstatSync("./client/images/"+item)
+		if (stat.isDirectory() === false) { 
+			// components.push(item)
+			Local_HeadStore[index] = "images/"+item
+		}
+	})
+	console.log(Local_HeadStore);
+}
+
+function Online_Head_Add(name, head) {
+	Online_HeadData[name] = head;
+}
+
 
 
 function Online_Charge(ip_str) {	//判断用户是否存在
@@ -53,6 +78,10 @@ io.on('connection', (socket) => {
 	// console.log("IP:" + clientIp);
 	//处理登录用户的名字
 	var user;
+	Read_LocalHead();
+	console.log('Init head')
+
+	socket.emit('Init head', Local_HeadStore);		//发送消息给所有客户端
 	if(Online_Charge(clientIp)){
 		user = Online_Get(clientIp);
 		socket.emit('user name', {			//发送给当前通信的客户端
@@ -72,8 +101,11 @@ io.on('connection', (socket) => {
 		// console.log(data);
 		cb('recieved');
 		let name = data.text;
+		let head = data.head;
 		console.log('get user name: '+ data.text);
+		console.log('get user head: '+ data.head);
 		user = Online_Add(clientIp, name);
+		Online_Head_Add(user, head);
 		socket.emit('user name', {   //发送给当前通信的客户端
 			flag : 'true',
 			name : user	

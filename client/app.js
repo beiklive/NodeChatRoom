@@ -1,4 +1,20 @@
 var myname = '';
+var myhead = 0;
+
+
+
+//选择头像
+function SelectedHead(e){
+	var index = e.getAttribute("data-index");
+	var lista=document.querySelectorAll(".head-list a");
+	//清空选择
+	for (let i = 0; i < lista.length; i++) {
+		lista[i].style.cssText="border-width: 1px;";
+	}
+	//改变选择项
+	lista[index].style.cssText="border-width: 4px;";
+	myhead = index;
+}
 // 创建类
 function App() {
 	var doc = document;	//获取网页元素
@@ -11,6 +27,7 @@ function App() {
 	this.$nameBtn = doc.querySelector('.name-btn');
 	this.$container = doc.querySelector('.container');
 	this.$name_container = doc.querySelector('.name-container');
+	this.$headbox = doc.querySelector('.head-list');
 	
 }
 
@@ -23,6 +40,7 @@ App.prototype.sendMsg = function () {
 	if (!message) return;		//如果没有消息则不发送
 
 	this.socket.emit('client message', {
+		head: myhead,
 		text: message,	//用户输入的消息
 		time: new Date()	//消息发送时间
 	}, function (a) {	//回调函数
@@ -30,10 +48,12 @@ App.prototype.sendMsg = function () {
 	});
 
 	//在自己界面增加消息
-	this.$content.innerHTML += '<div class="list">\
+	this.$content.innerHTML += '<div class="head  head-right">\
+			<div class="head-img"><img src="'+user_head[myhead]+'"></div>\
+								<div class="list">\
 									<p class="user-name text-right">'+myname+'</p>\
 									<div class="section section-self">'+ message + '</div>\
-								</div>';
+								</div></div>';
 	this.$content.scrollTop = this.$content.scrollHeight;
 	this.$input.value = '';
 };
@@ -45,16 +65,19 @@ App.prototype.KeySendMsg = function (event) {
 		if (!message) return;
 
 		this.socket.emit('client message', {
+			head: myhead,
 			text: message,
 			time: new Date()
 		}, function (a) {
 			//发送成功
 		});
 		console.log("myname" + myname);
-		this.$content.innerHTML += '<div class="list">\
-										<p class="user-name text-right">'+myname+'</p>\
-										<div class="section section-self">'+ message + '</div>\
-									</div>';
+		this.$content.innerHTML += '<div class="head  head-right">\
+		<div class="head-img"><img src="'+user_head[myhead]+'"></div>\
+						<div class="list">\
+							<p class="user-name text-right">'+myname+'</p>\
+							<div class="section section-self">'+ message + '</div>\
+						</div></div>';
 		this.$content.scrollTop = this.$content.scrollHeight;
 		this.$input.value = '';
 	}
@@ -67,6 +90,7 @@ App.prototype.sendName = function () {
 	if (!message) return;		//如果没有消息则不发送
 
 	this.socket.emit('client name', {
+		head: myhead,
 		text: message,	//用户输入的消息
 		time: new Date()	//消息发送时间
 	}, function (a) {	//回调函数
@@ -87,9 +111,11 @@ App.prototype.KeySendName = function (event) {
 		if (!message) return;
 
 		this.socket.emit('client name', {
+			head: myhead,
 			text: message,
 			time: new Date()
 		}, function (a) {
+			myname = message;
 			//发送成功
 			var box=document.getElementById("chat-login");
 			box.remove();
