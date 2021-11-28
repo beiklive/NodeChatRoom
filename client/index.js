@@ -75,7 +75,7 @@ socket.on('server message', (data) => {
 		a.$content.innerHTML += '<div class="head  head-right">\
 		<div class="head-img"><img src="'+user_head[data.head]+'"></div>\
 		<div class="list">\
-		<p class="user-name text-right"></p>\
+		<p class="user-name text-right">'+ data.author + '</p>\
 		<div class="section section-self">'+ data.text + '</div>\
 	</div></div>';
 	}
