@@ -34,7 +34,7 @@ socket.on('Init head', (data) => {
 
 //允许用户进入聊天室
 socket.on('user name', (data) => {
-	var flag = data.flag;
+	let flag = data.flag;
 	user_name = data.name;
 	console.log('name = ' + user_name);
 	if (flag == 'true') {
@@ -45,7 +45,7 @@ socket.on('user name', (data) => {
 
 //通知用户进入聊天室
 socket.on('user conncet', (data) => {
-	var str = data + '进入聊天室';
+	let str = data + '进入聊天室';
 	a.$content.innerHTML += '<div class="list text-center">\
 								<div class="info">'+ str + '</div>\
 							</div>';
@@ -54,7 +54,7 @@ socket.on('user conncet', (data) => {
 
 //通知用户离开聊天室
 socket.on('user disconnect', (data) => {
-	var str = data + '离开聊天室';
+	let str = data + '离开聊天室';
 	a.$content.innerHTML += '<div class="list text-center">\
 								<div class="info">'+ str + '</div>\
 							</div>';

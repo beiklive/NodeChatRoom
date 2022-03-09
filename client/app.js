@@ -5,8 +5,8 @@ var myhead = 0;
 
 //选择头像
 function SelectedHead(e){
-	var index = e.getAttribute("data-index");
-	var lista=document.querySelectorAll(".head-list a");
+	let index = e.getAttribute("data-index");
+	let lista=document.querySelectorAll(".head-list a");
 	//清空选择
 	for (let i = 0; i < lista.length; i++) {
 		lista[i].style.cssText="border-width: 1px;";
@@ -17,7 +17,7 @@ function SelectedHead(e){
 }
 // 创建类
 function App() {
-	var doc = document;	//获取网页元素
+	let doc = document;	//获取网页元素
 	this.$input = doc.querySelector('#input');		// 获取输入框
 	this.$content = doc.querySelector('.content');	//获取消息区div
 	this.$sendBtn = doc.querySelector('.send-btn');	//获取发送键
@@ -36,7 +36,7 @@ function App() {
 //发送消息
 App.prototype.sendMsg = function () {
 
-	var message = this.strEscape(this.$input.value);		//获取转义过的消息
+	let message = this.strEscape(this.$input.value);		//获取转义过的消息
 	if (!message) return;		//如果没有消息则不发送
 
 	this.socket.emit('client message', {
@@ -61,7 +61,7 @@ App.prototype.sendMsg = function () {
 //实现按回车键发送的功能
 App.prototype.KeySendMsg = function (event) {
 	if(event.keyCode == 13){
-		var message = this.strEscape(this.$input.value);
+		let message = this.strEscape(this.$input.value);
 		if (!message) return;
 
 		this.socket.emit('client message', {
@@ -86,7 +86,7 @@ App.prototype.KeySendMsg = function (event) {
 //发送名字
 App.prototype.sendName = function () {
 
-	var message = this.strEscape(this.$nameInput.value);		//获取转义过的消息
+	let message = this.strEscape(this.$nameInput.value);		//获取转义过的消息
 	if (!message) return;		//如果没有消息则不发送
 
 	this.socket.emit('client name', {
@@ -97,7 +97,7 @@ App.prototype.sendName = function () {
 		//发送成功
 		myname = message;
 		
-		var box=document.getElementById("chat-login");
+		let box=document.getElementById("chat-login");
 		box.remove();
 
 	});
@@ -107,7 +107,7 @@ App.prototype.sendName = function () {
 //实现按回车键发送名字的功能
 App.prototype.KeySendName = function (event) {
 	if(event.keyCode == 13){
-		var message = this.strEscape(this.$nameInput.value);
+		let message = this.strEscape(this.$nameInput.value);
 		if (!message) return;
 
 		this.socket.emit('client name', {
@@ -128,7 +128,7 @@ App.prototype.KeySendName = function (event) {
 //输入内容转义   
 //TODO 没太搞懂它转义了什么
 App.prototype.strEscape = function (str) {
-	var div = document.createElement('div');
+	let div = document.createElement('div');
 	if (div.innerText) {
 		div.innerText = str;
 	} else {

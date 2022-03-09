@@ -15,7 +15,7 @@ app.use(express.static(__dirname + '/client'));
 
 
 function Read_LocalHead(){
-	var fs = require('fs');
+	let fs = require('fs');
 
 	let components = []
 	const files = fs.readdirSync('./client/images')
@@ -74,10 +74,10 @@ function Online_Get(ip_str) {	//获取在线用户，返回用户名
 io.on('connection', (socket) => {
 	// console.log('a user connected，id: ' + socket.id);
 	// var clientIp = socket.request.connection.remoteAddress.substring(7);	//获取用户所连服务器的ip
-	var clientIp = socket.id;
+	let clientIp = socket.id;
 	// console.log("IP:" + clientIp);
 	//处理登录用户的名字
-	var user;
+	let user;
 	Read_LocalHead();
 	console.log('Init head')
 
