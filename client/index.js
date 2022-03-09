@@ -4,7 +4,7 @@ var user_name;
 var user_head;
 //编写socket.io的功能
 socket.on('connect', (skt) => {
-	console.log(skt);
+	// console.log(skt);
 });
 
 //允许用户进入聊天室
@@ -17,7 +17,7 @@ socket.on('Init head', (data) => {
 	// 	a.$name_container.style.visibility = 'hidden';
 	// }
 	user_head = data;
-	console.log("data:" + data);
+	// console.log("data:" + data);
 	a.$headbox.innerHTML += '\
 		<a href="#" class="head-img" data-index="0" style="border-width: 4px;" onclick="SelectedHead(this)">\
 			<img src="'+ data[0] +'">\
@@ -36,7 +36,7 @@ socket.on('Init head', (data) => {
 socket.on('user name', (data) => {
 	let flag = data.flag;
 	user_name = data.name;
-	console.log('name = ' + user_name);
+	// console.log('name = ' + user_name);
 	if (flag == 'true') {
 		a.$container.style.visibility = 'visible';
 		a.$name_container.style.visibility = 'hidden';
@@ -85,7 +85,7 @@ socket.on('server message', (data) => {
 
 //断连通知
 socket.on('disconnect', (data) => {
-	console.log('server disconnect: ' + JSON.stringify(data));
+	// console.log('server disconnect: ' + JSON.stringify(data));
 });
 
 //绑定a中控件的触发函数

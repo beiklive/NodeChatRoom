@@ -71,7 +71,6 @@ App.prototype.KeySendMsg = function (event) {
 		}, function (a) {
 			//发送成功
 		});
-		console.log("myname" + myname);
 		this.$content.innerHTML += '<div class="head  head-right">\
 		<div class="head-img"><img src="'+user_head[myhead]+'"></div>\
 						<div class="list">\
