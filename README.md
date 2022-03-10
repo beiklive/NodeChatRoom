@@ -3,7 +3,7 @@
 ## 1. Install
 
 ```
-npm install socket.io
+npm install
 ```
 
 ## 2. Use
